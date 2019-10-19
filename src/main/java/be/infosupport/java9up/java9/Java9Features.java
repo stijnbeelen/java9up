@@ -103,7 +103,7 @@ public class Java9Features implements JavaFeatures {
     }
 
     /**
-     * @deprecated
+     * @deprecated use {@link Java9Features#convertToList(String...)}
      * Method which converts an incoming array of strings to a set using {@link Set#of()}
      *
      * For List and Set interfaces, of(...) method is overloaded to have 0 to 10 parameters and one with var args parameter.
@@ -111,8 +111,8 @@ public class Java9Features implements JavaFeatures {
      * @param s2 second String to add to list
      */
     @Deprecated(forRemoval = true, since = "9")
-    void convertToList(String s1, String s2){
-        var stringList = List.of(s1, s2);
+    void convertToList(String s1, String s2, int i1){
+        var stringList = List.of(s1, s2, i1);
 
         log.info("The converted List contains: {}", stringList);
     }
