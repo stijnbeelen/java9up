@@ -16,6 +16,8 @@ public class Main {
         java9.printInterfaceAndClassName();
         java9.convertToSet("Java", "9", "is", "cool");
         java9.convertToList("Java", "9", "is", "cool");
+        java9.convertToMap(1, "Stijn", 2, "AP");
+        java9.convertToMap(10, "Stijn2", 20, "AP2");
         java9.streamOptionals();
         java9.innerClassDiamonds();
     }

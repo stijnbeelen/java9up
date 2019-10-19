@@ -10,15 +10,22 @@ import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * Class which has a method for the new features of Java 9
+ * Implements {@link JavaFeatures}
+ */
 public class Java9Features implements JavaFeatures {
     private static final Logger log = LoggerFactory.getLogger(Java9Features.class);
 
+    /**
+     * Method which sends a get request with the new HttpRequest.Builder and new HttpClient
+     * Logs the response
+     *
+     * @throws Java9Exception when something goes wrong
+     */
     void httpRequest() throws Java9Exception {
         try {
             var httpRequest = HttpRequest.newBuilder()
@@ -36,6 +43,9 @@ public class Java9Features implements JavaFeatures {
         }
     }
 
+    /**
+     * Method which displays the process id and command of the current process
+     */
     void getProcessInfo() {
         var processInfoBuilder = new ProcessInfo.Builder();
 
@@ -51,27 +61,67 @@ public class Java9Features implements JavaFeatures {
         log.info("Process with id {} had command {}", processInfo.getProcessId(), processInfo.getCommand());
     }
 
+    /**
+     * Method which kills the child processes of the current process
+     */
     void killChildren() {
         var children = ProcessHandle.current().children();
         children.forEach(ProcessHandle::destroy);
     }
 
+    /**
+     * Method which prints the name of the class and interface using {@link JavaFeatures#getInterfaceAndClassName()}
+     */
     void printInterfaceAndClassName() {
         log.info(this.getInterfaceAndClassName());
     }
 
+    /**
+     * Method which converts an incoming array of strings to a set using {@link Set#of()}
+     *
+     * For List and Set interfaces, of(...) method is overloaded to have 0 to 10 parameters and one with var args parameter.
+     *
+     * @param args var args strings to insert to the list
+     */
     void convertToSet(String... args) {
         var immutableSet = Set.of(args); //immutable set!
 
         log.info(immutableSet.toString());
     }
 
+    /**
+     * Method which converts an incoming array of strings to a set using {@link Set#of()}
+     *
+     * For List and Set interfaces, of(...) method is overloaded to have 0 to 10 parameters and one with var args parameter.
+     *
+     * @param args var args strings to insert to the list
+     */
     void convertToList(String... args) {
         var stringList = List.of(args);
 
         log.info(stringList.toString());
     }
 
+    /**
+     * Method which converts an incoming array of strings to a set using {@link Map#of()}
+     *
+     * For Map interface, of(...) method is overloaded to have 0 to 10 parameters.
+     * In case of more than 10 paramters for Map interface, ofEntries(...) method can be used accepting var args parameter.
+     *
+     * @param key1 the key for the first map entry
+     * @param var1 the variable for the first map entry
+     * @param key2 the key for the first map entry
+     * @param var2 the variable for the first map entry
+     */
+    void convertToMap(int key1, String var1, int key2, String var2){
+        var intStringMap = Map.of(key1, var1, key2, var2);
+
+        log.info("Map contains: {}", intStringMap);
+    }
+
+    /**
+     * Method which collects all values of a list of optionals, joins them and logs them as a String
+     */
     void streamOptionals() {
         List<Optional<String>> optionalList =
                 List.of(Optional.of("Java"), Optional.of("9"), Optional.of("is"), Optional.of("cool"));
@@ -81,6 +131,10 @@ public class Java9Features implements JavaFeatures {
         log.info(optionalsAsString);
     }
 
+    /**
+     * Method which declares a printer for different types of content.
+     * Prints all the added contents
+     */
     void innerClassDiamonds() {
         List<Printer<?>> printerList = new ArrayList<>();
 
