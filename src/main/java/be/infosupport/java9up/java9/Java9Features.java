@@ -73,7 +73,7 @@ public class Java9Features implements JavaFeatures {
      * Method which prints the name of the class and interface using {@link JavaFeatures#getInterfaceAndClassName()}
      */
     void printInterfaceAndClassName() {
-        log.info(this.getInterfaceAndClassName());
+        log.info("{}", this.getInterfaceAndClassName());
     }
 
     /**
@@ -86,7 +86,7 @@ public class Java9Features implements JavaFeatures {
     void convertToSet(String... args) {
         var immutableSet = Set.of(args); //immutable set!
 
-        log.info(immutableSet.toString());
+        log.info("The converted Set contains: {}", immutableSet);
     }
 
     /**
@@ -99,7 +99,22 @@ public class Java9Features implements JavaFeatures {
     void convertToList(String... args) {
         var stringList = List.of(args);
 
-        log.info(stringList.toString());
+        log.info("The converted List contains: {}", stringList);
+    }
+
+    /**
+     * @deprecated
+     * Method which converts an incoming array of strings to a set using {@link Set#of()}
+     *
+     * For List and Set interfaces, of(...) method is overloaded to have 0 to 10 parameters and one with var args parameter.
+     * @param s1 first String to add to list
+     * @param s2 second String to add to list
+     */
+    @Deprecated(forRemoval = true, since = "9")
+    void convertToList(String s1, String s2){
+        var stringList = List.of(s1, s2);
+
+        log.info("The converted List contains: {}", stringList);
     }
 
     /**
