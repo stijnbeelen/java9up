@@ -1,10 +1,8 @@
-package be.infosupport.java9up.java9;
+package be.infosupport.java9up;
 
 import java.util.Arrays;
 
 public interface JavaFeatures {
-    void doSomething();
-
     default String getInterfaceAndClassName(){
         return String.format("Class %s is implementation of interface %s", getClassName(), getInterfaceName());
     }
