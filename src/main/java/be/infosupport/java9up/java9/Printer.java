@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 class Printer<T> {
     private static final Logger log = LoggerFactory.getLogger(Printer.class);
 
-    T content;
+    private T content;
 
     Printer(T content) {
         this.content = content;
