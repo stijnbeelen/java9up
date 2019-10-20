@@ -109,6 +109,7 @@ public class Java9Features implements JavaFeatures {
      * For List and Set interfaces, of(...) method is overloaded to have 0 to 10 parameters and one with var args parameter.
      * @param s1 first String to add to list
      * @param s2 second String to add to list
+     * @param i1 integer to add to list
      */
     @Deprecated(forRemoval = true, since = "9")
     void convertToList(String s1, String s2, int i1){
