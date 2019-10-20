@@ -1,14 +1,10 @@
 package be.infosupport.java9up;
 
-import be.infosupport.java9up.java9.Java9Features;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.List;
 
-public class Main {
-    private static final Logger log = LoggerFactory.getLogger(Java9Features.class);
-
+class Main {
     public static void main(String[] args) {
-        /*System.out.println("""
+        System.out.println("""
                            Hello my dear people
                            This is how it works
                            "
@@ -34,9 +30,7 @@ public class Main {
                            }""");
 
         System.out.println("""
-        Hallo!""");*/
-
-
+        Hallo!""");
     }
 
     private static int getIntValue(String mode) {

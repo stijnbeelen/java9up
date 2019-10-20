@@ -3,7 +3,7 @@ package be.infosupport.java9up.java9;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class Java9Main {
+class Java9Main {
 
     private static final Logger log = LoggerFactory.getLogger(Java9Main.class);
 
@@ -28,8 +28,8 @@ public class Java9Main {
         log.info("--- calling java9 convertToList ---");
         java9.convertToList("Java", "9", "is", "cool");
 
-        log.info("--- calling deprecated java9 convertToList ---");
-        java9.convertToList("Java", "is cool", 9);
+//        log.info("--- calling deprecated java9 convertToList ---");
+//        java9.convertToList("Java", "is cool", 9);
 
         log.info("--- calling java9 convertToMap ---");
         java9.convertToMap(1, "Stijn", 2, "AP");

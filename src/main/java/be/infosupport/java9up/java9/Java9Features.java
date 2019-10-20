@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
  * Class which has a method for the new features of Java 9
  * Implements {@link JavaFeatures}
  */
-public class Java9Features implements JavaFeatures {
+class Java9Features implements JavaFeatures {
     private static final Logger log = LoggerFactory.getLogger(Java9Features.class);
 
     /**
@@ -122,7 +122,7 @@ public class Java9Features implements JavaFeatures {
      * Method which converts an incoming array of strings to a set using {@link Map#of()}
      *
      * For Map interface, of(...) method is overloaded to have 0 to 10 parameters.
-     * In case of more than 10 paramters for Map interface, ofEntries(...) method can be used accepting var args parameter.
+     * In case of more than 10 parameters for Map interface, ofEntries(...) method can be used accepting var args parameter.
      *
      * @param key1 the key for the first map entry
      * @param var1 the variable for the first map entry
@@ -158,6 +158,7 @@ public class Java9Features implements JavaFeatures {
         printerList.add(new Printer<>(2));
         printerList.add(new Printer<>("test"));
         printerList.add(new Printer<>(new Person("Stijn", 24)));
+        printerList.add(new Printer<>(new Person("AP", 50)));
 
         printerList.forEach(Printer::print);
     }

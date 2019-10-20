@@ -1,8 +1,8 @@
 package be.infosupport.java9up.java9;
 
-public class Person {
-    private String name;
-    private int age;
+class Person {
+    private final String name;
+    private final int age;
 
     Person(String name, int age) {
         this.name = name;

@@ -24,7 +24,7 @@ Repository with new features of Java 9, 10, 11, 12 & 13.
     - delays & timeouts
     - subclassing
     - new factory methods
-- improved javadocs: `javadoc -d C:/JAVA -html5 Tester.java`
+- improved javadoc
 - improved [@Deprecated](src/main/java/be/infosupport/java9up/java9/Java9Features.java#L113)
 - Modules
 - REPL
