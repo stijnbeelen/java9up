@@ -8,7 +8,7 @@ Repository with new features of Java 9, 10, 11, 12 & 13.
 - [new HttpClient & HttpRequest](src/main/java/be/infosupport/java9up/java9/Java9Features.java#L29)
 - [Process API improvements](src/main/java/be/infosupport/java9up/java9/Java9Features.java#L49)
 - [Killing Processes](src/main/java/be/infosupport/java9up/java9/Java9Features.java#L67)
-- [Private interface methods](src/main/java/be/infosupport/java9up/JavaFeatures.java#L8)
+- [Private interface methods](src/main/java/be/infosupport/java9up/java9/JavaFeatures.java#L8)
 - [Collection factory methods](src/main/java/be/infosupport/java9up/java9/Java9Features.java#L86)
 - optional class improvements
     - [.stream()](src/main/java/be/infosupport/java9up/java9/Java9Features.java#L141)
@@ -30,6 +30,7 @@ Repository with new features of Java 9, 10, 11, 12 & 13.
 - REPL
 - Multi release JAR's
 - Garbage collector
+- try with resources improvement
 
 ## Java 10
 

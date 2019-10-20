@@ -1,9 +1,9 @@
-package be.infosupport.java9up;
+package be.infosupport.java9up.java13;
 
 import java.util.List;
 
-class Main {
-    public static void main(String[] args) {
+public class Java13Features {
+    void printFormattedString(){
         System.out.println("""
                            Hello my dear people
                            This is how it works

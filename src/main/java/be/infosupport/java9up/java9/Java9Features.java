@@ -1,10 +1,10 @@
 package be.infosupport.java9up.java9;
 
-import be.infosupport.java9up.JavaFeatures;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.http.HttpClient;
@@ -12,6 +12,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Class which has a method for the new features of Java 9
@@ -28,7 +29,7 @@ class Java9Features implements JavaFeatures {
      */
     void httpRequest() throws Java9Exception {
         try {
-            var httpRequest = HttpRequest.newBuilder()
+            HttpRequest httpRequest = HttpRequest.newBuilder()
                     .uri(new URI("https://postman-echo.com/get"))
                     .GET()
                     .header("Accept-Language", "nl")
@@ -47,13 +48,13 @@ class Java9Features implements JavaFeatures {
      * Method which displays the process id and command of the current process
      */
     void getProcessInfo() {
-        var processInfoBuilder = new ProcessInfo.Builder();
+        ProcessInfo.Builder processInfoBuilder = new ProcessInfo.Builder();
 
-        var processHandle = ProcessHandle.current();
-        var processHandleInfo = processHandle.info();
-        var command = processHandleInfo.command().isPresent() ? processHandleInfo.command().get() : null;
+        ProcessHandle processHandle = ProcessHandle.current();
+        ProcessHandle.Info processHandleInfo = processHandle.info();
+        String command = processHandleInfo.command().isPresent() ? processHandleInfo.command().get() : null;
 
-        var processInfo = processInfoBuilder
+        ProcessInfo processInfo = processInfoBuilder
                 .processId(processHandle.pid())
                 .command(command)
                 .build();
@@ -65,7 +66,7 @@ class Java9Features implements JavaFeatures {
      * Method which kills the child processes of the current process
      */
     void killChildren() {
-        var children = ProcessHandle.current().children();
+        Stream<ProcessHandle> children = ProcessHandle.current().children();
         children.forEach(ProcessHandle::destroy);
     }
 
@@ -84,7 +85,7 @@ class Java9Features implements JavaFeatures {
      * @param args var args strings to insert to the list
      */
     void convertToSet(String... args) {
-        var immutableSet = Set.of(args); //immutable set!
+        Set<String> immutableSet = Set.of(args); //immutable set!
 
         log.info("The converted Set contains: {}", immutableSet);
     }
@@ -97,7 +98,7 @@ class Java9Features implements JavaFeatures {
      * @param args var args strings to insert to the list
      */
     void convertToList(String... args) {
-        var stringList = List.of(args);
+        List<String> stringList = List.of(args);
 
         log.info("The converted List contains: {}", stringList);
     }
@@ -113,7 +114,7 @@ class Java9Features implements JavaFeatures {
      */
     @Deprecated(forRemoval = true, since = "9")
     void convertToList(String s1, String s2, int i1){
-        var stringList = List.of(s1, s2, i1);
+        List<? extends Serializable> stringList = List.of(s1, s2, i1);
 
         log.info("The converted List contains: {}", stringList);
     }
@@ -130,7 +131,7 @@ class Java9Features implements JavaFeatures {
      * @param var2 the variable for the first map entry
      */
     void convertToMap(int key1, String var1, int key2, String var2){
-        var intStringMap = Map.of(key1, var1, key2, var2);
+        Map<Integer, String> intStringMap = Map.of(key1, var1, key2, var2);
 
         log.info("Map contains: {}", intStringMap);
     }
@@ -142,7 +143,7 @@ class Java9Features implements JavaFeatures {
         List<Optional<String>> optionalList =
                 List.of(Optional.of("Java"), Optional.of("9"), Optional.of("is"), Optional.of("cool"));
 
-        var optionalsAsString = optionalList.stream().flatMap(Optional::stream).collect(Collectors.joining(" "));
+        String optionalsAsString = optionalList.stream().flatMap(Optional::stream).collect(Collectors.joining(" "));
 
         log.info(optionalsAsString);
     }
@@ -154,11 +155,30 @@ class Java9Features implements JavaFeatures {
     void innerClassDiamonds() {
         List<Printer<?>> printerList = new ArrayList<>();
 
-        printerList.add(new Printer<>(1));
-        printerList.add(new Printer<>(2));
-        printerList.add(new Printer<>("test"));
-        printerList.add(new Printer<>(new Person("Stijn", 24)));
-        printerList.add(new Printer<>(new Person("AP", 50)));
+        printerList.add(new Printer<>(1) {
+            @Override
+            void print() {
+                log.info("This integer has value {}", content);
+            }
+        });
+        printerList.add(new Printer<>("test") {
+            @Override
+            void print() {
+                log.info("This String has value {}", content);
+            }
+        });
+        printerList.add(new Printer<>(new Person("Stijn", 24)) {
+            @Override
+            void print() {
+                log.info("This Person has string value {}", content);
+            }
+        });
+        printerList.add(new Printer<>(new Person("AP", 50)) {
+            @Override
+            void print() {
+                log.info("This other Person has string value {}", content);
+            }
+        });
 
         printerList.forEach(Printer::print);
     }

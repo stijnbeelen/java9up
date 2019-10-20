@@ -8,7 +8,7 @@ class Java9Main {
     private static final Logger log = LoggerFactory.getLogger(Java9Main.class);
 
     public static void main(String[] args) {
-        var java9 = new Java9Features();
+        Java9Features java9 = new Java9Features();
 
         log.info("--- calling java9 httpRequest ---");
         java9.httpRequest();

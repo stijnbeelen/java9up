@@ -1,4 +1,4 @@
-package be.infosupport.java9up;
+package be.infosupport.java9up.java9;
 
 public interface JavaFeatures {
     default String getInterfaceAndClassName(){
