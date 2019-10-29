@@ -51,7 +51,7 @@ Sources:
 - Unmodifiable collections
     - [List.copyOf()](https://www.baeldung.com/java-copy-list-to-another)
     - [Set.copyOf()](https://www.baeldung.com/java-copy-sets)
-    - .toUnmodifiable()
+    - Stream.toUnmodifiable()
 - optional class improvements
     - .orElseThrow()
 - [performance improvements](https://www.baeldung.com/java-10-performance-improvements)
