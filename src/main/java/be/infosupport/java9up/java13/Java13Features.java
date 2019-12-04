@@ -2,36 +2,37 @@ package be.infosupport.java9up.java13;
 
 import java.util.List;
 
-public class Java13Features {
-    void printFormattedString(){
-        System.out.println("""
-                           Hello my dear people
-                           This is how it works
-                           "
-                           \\
-                           """);
+class Java13Features {
 
-        var chars = List.of("a", "b", "c", "d");
-        chars.forEach(c -> System.out.println(getIntValue(c)));
+    /**
+     * Preview Feature
+     */
+    void textBlockPreview() {
+        var textBlock = """
 
-        System.out.println("""
-                           {
-                               greeting: "hello",
-                               audience: "text blocks",
-                               punctuation: "!"
-                           }""");
+                        1
+                        2""";
+        var stringLiteral = "\n1\n2";
 
-        System.out.println("""
-                           {
-                               greeting: "hello",
-                               audience: "text blocks",
-                               punctuation: "!"
-                           }""");
+        System.out.println("text block: " + textBlock);
+        System.out.println("string literal: " + stringLiteral);
 
-        System.out.println("""
-        Hallo!""");
+        System.out.println("text block and string literal equals : " + textBlock.equals(stringLiteral));
+        System.out.println("text block and string literal == : " + (textBlock == stringLiteral));
+
+        var output = "name: %s, tel: %d".formatted("Stijn", 123456789);
+
+        System.out.println(output);
     }
 
+    void switchPreview(){
+        var chars = List.of("a", "b", "c", "d");
+        chars.forEach(c -> System.out.println(getIntValue(c)));
+    }
+
+    /**
+     * Preview Feature
+     */
     private static int getIntValue(String mode) {
         return switch (mode) {
             case "a", "b":

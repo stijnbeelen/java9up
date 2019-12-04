@@ -1,24 +1,22 @@
 package be.infosupport.java9up.java12;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.text.NumberFormat;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
-import java.util.function.*;
+import java.util.function.BiFunction;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public class Java12Features {
+class Java12Features {
 
     void indent() {
         var notIndentedString = "Hello there :)";
 
-        System.out.println("This string is positively indented: " + notIndentedString.indent(3));
+        System.out.print("This string is positively indented: " + notIndentedString.indent(3));
 
         var indentedString = "   Hello :)";
-        System.out.println("This string is negatively indented: " + indentedString.indent(-3));
+        System.out.print("This string is negatively indented: " + indentedString.indent(-3));
     }
 
     void transform() {
@@ -26,14 +24,17 @@ public class Java12Features {
 
         var result = "hello".transform(stringTransformation);
         var intResult = "42".transform(Integer::parseInt);
+
+        System.out.println("transformed string: " + result);
+        System.out.println("transformed int: " + intResult);
     }
 
-    void switchUpdate() {
+    void switchUpdatePreview() {
         var fruit = "PEAR";
         int numberOfLetters;
 
         // Java 11
-        switch (fruit) {
+        /*switch (fruit) {
             case "PEAR":
                 numberOfLetters = 4;
                 break;
@@ -41,21 +42,23 @@ public class Java12Features {
             case "GRAPE":
                 numberOfLetters = 5;
                 break;
-        }
+        }*/
 
-        // Java 12 - preview
-        int newNumberOfLetters = switch (fruit) {
+        // Java 12 preview
+        numberOfLetters = switch (fruit) {
             case "PEAR" -> 4;
             case "APPLE", "GRAPE" -> 5;
             default -> 0;
         };
+
+        System.out.println("Number of letters in PEAR: " + numberOfLetters);
     }
 
     void numberFormatting() {
         var shortFormat = NumberFormat.getCompactNumberInstance(new Locale("nl", "BE"), NumberFormat.Style.SHORT);
         shortFormat.setMaximumFractionDigits(2);
 
-        System.out.println("Dit numer is kort geformatteerd: " + shortFormat.format(2019));
+        System.out.println("Dit nummer is kort geformatteerd: " + shortFormat.format(2019));
     }
 
     void teeingCollector(){

@@ -1,21 +1,14 @@
 package be.infosupport.java9up.java11;
 
-import be.infosupport.java9up.java9.JavaFeatures;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import org.jetbrains.annotations.NotNull;
+
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 
-/**
- * Class which has a method for the new features of Java 9
- */
-public class Java11Features{
+class Java11Features{
 
     void lambdaVariables(){
         var arrInteger = new Integer[]{5, 9, 3, 6, 2, 4, 8, 7, 1, null};
@@ -39,7 +32,7 @@ public class Java11Features{
         System.out.println("Yesterday I was watching the movie " + repeat);
 
         var strip = "\n\t  hello   \u2005".strip(); //trim difference: trim will not recognize \u2005 as it is Unicode
-        System.out.println(strip + "there!"); //also .stripTailing() & .stripLeading()
+        System.out.println(strip + " there!"); //also .stripTailing() & .stripLeading()
 
         var emptyString = "";
 
@@ -54,6 +47,7 @@ public class Java11Features{
     }
 
     //Java 11 http client Updates
+
     void negatePredicate(){
         var people = List.of(new Person(1), new Person(20), new Person(50));
 
@@ -64,6 +58,6 @@ public class Java11Features{
         //with 11
         children = people.stream().filter(Predicate.not(Person::isAdult)).collect(Collectors.toList()); //static import -> not()
 
-        System.out.println("There are " + adults.size() + "adults and " + children.size() + "children.");
+        System.out.println("There are " + adults.size() + " adults and " + children.size() + " children.");
     }
 }

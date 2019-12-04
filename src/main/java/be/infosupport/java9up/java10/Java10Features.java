@@ -1,8 +1,5 @@
 package be.infosupport.java9up.java10;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -13,8 +10,6 @@ class Java10Features {
         return i % 2 == 0;
     }
 
-    // TODO: wat is het verschil tussen een Set en een List?
-
     void copyToImmutableList(Set<String> stringSet){
         var list = List.copyOf(stringSet);
 
@@ -24,7 +19,7 @@ class Java10Features {
     void copyToImmutableSet(List<String> stringList){
         var set = Set.copyOf(stringList);
 
-        System.out.println("Set content: {}" + set);
+        System.out.println("Set content: " + set);
     }
 
     void toUnmodifiableList(List<Integer> integerList){
@@ -44,10 +39,12 @@ class Java10Features {
     }
 
     void optionalOrElseThrow(List<Integer> integerList){
-        Integer integer = integerList.stream()
+        var integer = integerList.stream()
                 .filter(Java10Features::checkIfEven)
                 .findFirst()
                 .orElseThrow();
+
+        System.out.println("First even integer: " + integer);
     }
 
 }

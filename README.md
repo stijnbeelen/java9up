@@ -2,11 +2,6 @@
 
 Repository with new features of Java 9, 10, 11, 12 & 13.
 
-Links to look at: 
-- [Codete](https://codete.com/blog/java-8-java-11-quick-guide/)
-- [JournalDev](https://www.journaldev.com/24601/java-11-features)
-- [Baeldung JDK's](https://www.baeldung.com/oracle-jdk-vs-openjdk)
-
 ## Java 9
 
 [Features](src/main/java/be/infosupport/java9up/java9/Java9Features.java): 
@@ -37,10 +32,6 @@ Links to look at:
 - Garbage collector
 - try with resources improvement
 
-Sources:
-- [Baeldung](https://www.baeldung.com/new-java-9)
-- [TutorialsPoint](https://www.tutorialspoint.com/java9/index.htm)
-
 ## Java 10
 
 [Features](https://www.baeldung.com/java-10-overview):
@@ -62,16 +53,12 @@ Sources:
         - `-XX:InitialRAMPercentage` 
         - `-XX:MaxRAMPercentage`
         - `-XX:MinRAMPercentage`
-- root certificates
 - Time-based Release Versioning
     - 1 release each 6 months
     - feature release support will only last 6 months
     - LTS release will be supported for 3 years
 - [Graal](https://www.baeldung.com/graal-java-jit-compiler)
     - `-XX:+UnlockExperimentalVMOptions -XX:+UseJVMCICompiler`
-
-Sources:
-- [Baeldung](https://www.baeldung.com/java-10-overview)
 
 ## Java 11
 
@@ -92,8 +79,11 @@ Sources:
 
 Features:
 - [String API additions](https://www.baeldung.com/java12-string-api)
+- Switch preview
+- Number formatting
+- Collectors.teeing()
 
 ## Java 13
 
-- [InfoWorld](https://www.infoworld.com/article/3340052/jdk-13-the-new-features-in-java-13.html)
-- [CodeFX](https://blog.codefx.org/java/text-blocks/)
+- Text Block Preview
+- Switch preview
