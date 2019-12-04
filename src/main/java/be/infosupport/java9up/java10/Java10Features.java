@@ -8,7 +8,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 class Java10Features {
-    private static final Logger log = LoggerFactory.getLogger(Java10Features.class);
 
     private static boolean checkIfEven(int i) {
         return i % 2 == 0;
@@ -19,13 +18,13 @@ class Java10Features {
     void copyToImmutableList(Set<String> stringSet){
         var list = List.copyOf(stringSet);
 
-        log.info("list content: {}", list);
+        System.out.println("list content: " + list);
     }
 
     void copyToImmutableSet(List<String> stringList){
         var set = Set.copyOf(stringList);
 
-        log.info("Set content: {}", set);
+        System.out.println("Set content: {}" + set);
     }
 
     void toUnmodifiableList(List<Integer> integerList){

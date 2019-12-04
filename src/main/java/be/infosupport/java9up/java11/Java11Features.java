@@ -16,7 +16,6 @@ import java.util.stream.Collectors;
  * Class which has a method for the new features of Java 9
  */
 public class Java11Features{
-    private static final Logger log = LoggerFactory.getLogger(Java11Features.class);
 
     void lambdaVariables(){
         var arrInteger = new Integer[]{5, 9, 3, 6, 2, 4, 8, 7, 1, null};
@@ -24,39 +23,39 @@ public class Java11Features{
         //Java 10
         var amountOfItemsLargerThan5 = Arrays.stream(arrInteger)
                 .filter(x -> (x != null && x > 5)).count();
-        log.info("There are {} items larger than 5 in our list", amountOfItemsLargerThan5);
+        System.out.println("There are " + amountOfItemsLargerThan5 + " items larger than 5 in our list");
 
         //Java 11
         amountOfItemsLargerThan5 = Arrays.stream(arrInteger)
                 .filter((@NotNull var a) -> (a > 5)).count();
         // .filter(@NotNull var x -> x > 5).count(); WILL NOT WORK
 
-        log.info("There are {} items larger than 5 in our list", amountOfItemsLargerThan5);
+        System.out.println("There are " + amountOfItemsLargerThan5 + " items larger than 5 in our list");
     }
 
     void stringAPIAdditions(){
         var repeat = "La ".repeat(2) + "Land";
 
-        log.info("Yesterday I was watching the movie {}", repeat);
+        System.out.println("Yesterday I was watching the movie " + repeat);
 
         var strip = "\n\t  hello   \u2005".strip(); //trim difference: trim will not recognize \u2005 as it is Unicode
-        log.info("{} there!", strip); //also .stripTailing() & .stripLeading()
+        System.out.println(strip + "there!"); //also .stripTailing() & .stripLeading()
 
         var emptyString = "";
 
         if (emptyString.isBlank()){
-            log.info("The given string was blank!");
+            System.out.println("The given string was blank!");
         }
 
         var multipleLines = "Hello\n dear students\n \n!";
 
         var amountOfLines = multipleLines.lines().count();
-        log.info("The text contained {} lines", amountOfLines);
+        System.out.println("The text contained " + amountOfLines + " lines");
     }
 
     //Java 11 http client Updates
     void negatePredicate(){
-        var people = List.of(new Person(1), new Person(20));
+        var people = List.of(new Person(1), new Person(20), new Person(50));
 
         // before 11
         var adults = people.stream().filter(Person::isAdult).collect(Collectors.toList());
@@ -64,5 +63,7 @@ public class Java11Features{
 
         //with 11
         children = people.stream().filter(Predicate.not(Person::isAdult)).collect(Collectors.toList()); //static import -> not()
+
+        System.out.println("There are " + adults.size() + "adults and " + children.size() + "children.");
     }
 }

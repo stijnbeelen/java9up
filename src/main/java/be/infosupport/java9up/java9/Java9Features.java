@@ -19,7 +19,6 @@ import java.util.stream.Stream;
  * Implements {@link JavaFeatures}
  */
 class Java9Features implements JavaFeatures {
-    private static final Logger log = LoggerFactory.getLogger(Java9Features.class);
 
     /**
      * Method which sends a get request with the new HttpRequest.Builder and new HttpClient
@@ -27,21 +26,17 @@ class Java9Features implements JavaFeatures {
      *
      * @throws Java9Exception when something goes wrong
      */
-    void httpRequest() throws Java9Exception {
-        try {
-            HttpRequest httpRequest = HttpRequest.newBuilder()
-                    .uri(new URI("https://postman-echo.com/get"))
-                    .GET()
-                    .header("Accept-Language", "nl")
-                    .build();
+    void httpRequest() throws URISyntaxException, IOException, InterruptedException {
+        HttpRequest httpRequest = HttpRequest.newBuilder()
+            .uri(new URI("https://postman-echo.com/get"))
+            .GET()
+            .header("Accept-Language", "nl")
+            .build();
 
 //            HttpResponse<String> response = HttpClient.newHttpClient().send(httpRequest, HttpResponse.BodyHandler.asString()); //java 9
-            HttpResponse<String> response = HttpClient.newHttpClient().send(httpRequest, HttpResponse.BodyHandlers.ofString()); //java 11
+        HttpResponse<String> response = HttpClient.newHttpClient().send(httpRequest, HttpResponse.BodyHandlers.ofString()); //java 11
 
-            log.info("Response from API: {}", response.body());
-        } catch (StackOverflowError | InterruptedException | IOException | URISyntaxException e) {
-            throw new Java9Exception("Something went wrong while sending httpRequest to postman-echo", e);
-        }
+        System.out.println("Response from API: " + response.body());
     }
 
     /**
@@ -55,11 +50,11 @@ class Java9Features implements JavaFeatures {
         String command = processHandleInfo.command().isPresent() ? processHandleInfo.command().get() : null;
 
         ProcessInfo processInfo = processInfoBuilder
-                .processId(processHandle.pid())
-                .command(command)
-                .build();
+            .processId(processHandle.pid())
+            .command(command)
+            .build();
 
-        log.info("Process with id {} had command {}", processInfo.getProcessId(), processInfo.getCommand());
+        System.out.println("Process with id " + processInfo.getProcessId() + " had command " + processInfo.getCommand());
     }
 
     /**
@@ -74,12 +69,12 @@ class Java9Features implements JavaFeatures {
      * Method which prints the name of the class and interface using {@link JavaFeatures#getInterfaceAndClassName()}
      */
     void printInterfaceAndClassName() {
-        log.info("{}", this.getInterfaceAndClassName());
+        System.out.println(this.getInterfaceAndClassName());
     }
 
     /**
      * Method which converts an incoming array of strings to a set using {@link Set#of()}
-     *
+     * <p>
      * For List and Set interfaces, of(...) method is overloaded to have 0 to 10 parameters and one with var args parameter.
      *
      * @param args var args strings to insert to the list
@@ -87,12 +82,12 @@ class Java9Features implements JavaFeatures {
     void convertToSet(String... args) {
         Set<String> immutableSet = Set.of(args); //immutable set!
 
-        log.info("The converted Set contains: {}", immutableSet);
+        System.out.println("The converted Set contains: " + immutableSet);
     }
 
     /**
      * Method which converts an incoming array of strings to a set using {@link Set#of()}
-     *
+     * <p>
      * For List and Set interfaces, of(...) method is overloaded to have 0 to 10 parameters and one with var args parameter.
      *
      * @param args var args strings to insert to the list
@@ -100,28 +95,28 @@ class Java9Features implements JavaFeatures {
     void convertToList(String... args) {
         List<String> stringList = List.of(args);
 
-        log.info("The converted List contains: {}", stringList);
+        System.out.println("The converted List contains: " + stringList);
     }
 
     /**
-     * @deprecated use {@link Java9Features#convertToList(String...)}
-     * Method which converts an incoming array of strings to a set using {@link Set#of()}
-     *
-     * For List and Set interfaces, of(...) method is overloaded to have 0 to 10 parameters and one with var args parameter.
      * @param s1 first String to add to list
      * @param s2 second String to add to list
      * @param i1 integer to add to list
+     * @deprecated use {@link Java9Features#convertToList(String...)}
+     * Method which converts an incoming array of strings to a set using {@link Set#of()}
+     * <p>
+     * For List and Set interfaces, of(...) method is overloaded to have 0 to 10 parameters and one with var args parameter.
      */
     @Deprecated(forRemoval = true, since = "9")
-    void convertToList(String s1, String s2, int i1){
+    void convertToList(String s1, String s2, int i1) {
         List<? extends Serializable> stringList = List.of(s1, s2, i1);
 
-        log.info("The converted List contains: {}", stringList);
+        System.out.println("The converted List contains: " + stringList);
     }
 
     /**
      * Method which converts an incoming array of strings to a set using {@link Map#of()}
-     *
+     * <p>
      * For Map interface, of(...) method is overloaded to have 0 to 10 parameters.
      * In case of more than 10 parameters for Map interface, ofEntries(...) method can be used accepting var args parameter.
      *
@@ -130,10 +125,10 @@ class Java9Features implements JavaFeatures {
      * @param key2 the key for the first map entry
      * @param var2 the variable for the first map entry
      */
-    void convertToMap(int key1, String var1, int key2, String var2){
+    void convertToMap(int key1, String var1, int key2, String var2) {
         Map<Integer, String> intStringMap = Map.of(key1, var1, key2, var2);
 
-        log.info("Map contains: {}", intStringMap);
+        System.out.println("Map contains: " + intStringMap);
     }
 
     /**
@@ -141,11 +136,11 @@ class Java9Features implements JavaFeatures {
      */
     void streamOptionals() {
         List<Optional<String>> optionalList =
-                List.of(Optional.of("Java"), Optional.of("9"), Optional.of("is"), Optional.of("cool"));
+            List.of(Optional.of("Java"), Optional.of("9"), Optional.of("is"), Optional.of("cool"));
 
         String optionalsAsString = optionalList.stream().flatMap(Optional::stream).collect(Collectors.joining(" "));
 
-        log.info(optionalsAsString);
+        System.out.println(optionalsAsString);
     }
 
     /**
