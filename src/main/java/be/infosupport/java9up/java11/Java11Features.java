@@ -6,15 +6,17 @@ import org.slf4j.LoggerFactory;
 
 import org.jetbrains.annotations.NotNull;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 
 /**
  * Class which has a method for the new features of Java 9
- * Implements {@link JavaFeatures}
  */
-public class Java11Features implements JavaFeatures {
+public class Java11Features{
     private static final Logger log = LoggerFactory.getLogger(Java11Features.class);
-
 
     void lambdaVariables(){
         var arrInteger = new Integer[]{5, 9, 3, 6, 2, 4, 8, 7, 1, null};
@@ -53,5 +55,14 @@ public class Java11Features implements JavaFeatures {
     }
 
     //Java 11 http client Updates
+    void negatePredicate(){
+        var people = List.of(new Person(1), new Person(20));
 
+        // before 11
+        var adults = people.stream().filter(Person::isAdult).collect(Collectors.toList());
+        var children = people.stream().filter(x -> !x.isAdult()).collect(Collectors.toList()); //or create method isNotAdult
+
+        //with 11
+        children = people.stream().filter(Predicate.not(Person::isAdult)).collect(Collectors.toList()); //static import -> not()
+    }
 }

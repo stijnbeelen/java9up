@@ -84,7 +84,6 @@ Features:
 - [Epsilon GC](https://www.baeldung.com/jvm-epsilon-gc-garbage-collector)
 - [jlink](https://www.baeldung.com/jlink)
 - [Predicate.not()](https://www.baeldung.com/java-negate-predicate-method-reference)
-- [Empty String to empty Optional](https://www.baeldung.com/java-empty-string-to-empty-optional)
 
 Sources:
 - [Baeldung](https://github.com/eugenp/tutorials/tree/master/core-java-modules/core-java-11)
