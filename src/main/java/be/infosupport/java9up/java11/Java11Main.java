@@ -10,5 +10,7 @@ public class Java11Main {
         java11Features.stringAPIAdditions();
 
         java11Features.negatePredicate();
+
+        java11Features.emptyOptional();
     }
 }

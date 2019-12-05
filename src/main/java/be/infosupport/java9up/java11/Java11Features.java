@@ -4,6 +4,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -52,12 +53,27 @@ class Java11Features{
         var people = List.of(new Person(1), new Person(20), new Person(50));
 
         // before 11
-        var adults = people.stream().filter(Person::isAdult).collect(Collectors.toList());
-        var children = people.stream().filter(x -> !x.isAdult()).collect(Collectors.toList()); //or create method isNotAdult
+        var adults = people.stream()
+            .filter(Person::isAdult)
+            .collect(Collectors.toList());
+
+        var children = people.stream()
+            .filter(x -> !x.isAdult())
+            .collect(Collectors.toList()); //or create method isNotAdult
 
         //with 11
         children = people.stream().filter(Predicate.not(Person::isAdult)).collect(Collectors.toList()); //static import -> not()
 
         System.out.println("There are " + adults.size() + " adults and " + children.size() + " children.");
+    }
+
+    void emptyOptional() {
+        Optional<String> a = Optional.of("Hello");
+
+        if (a.isEmpty()) {
+            System.out.println("Optional did not contain any value");
+        } else {
+            System.out.println("Optional contains value: " + a.get());
+        }
     }
 }

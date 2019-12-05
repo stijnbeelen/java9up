@@ -9,6 +9,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 class Java9Features implements JavaFeatures {
@@ -21,7 +22,11 @@ class Java9Features implements JavaFeatures {
             .build();
 
 //            HttpResponse<String> response = HttpClient.newHttpClient().send(httpRequest, HttpResponse.BodyHandler.asString()); //java 9
-        HttpResponse<String> response = HttpClient.newHttpClient().send(httpRequest, HttpResponse.BodyHandlers.ofString()); //java 11
+        HttpResponse<String> response =
+            HttpClient.newBuilder()
+                .version(HttpClient.Version.HTTP_2) //standard, automatically downgraded
+                .build()
+                .send(httpRequest, HttpResponse.BodyHandlers.ofString()); //java 11
 
         System.out.println("Response from API: " + response.body());
     }
@@ -116,5 +121,53 @@ class Java9Features implements JavaFeatures {
         });
 
         printerList.forEach(Printer::print);
+    }
+
+    void streamFeatures() {
+        var intList = List.of(9, 5, 3, 6, 2, 1, 8, 4, 7);
+
+        // Java 8
+        for (Integer i : intList) {
+            if (i == 6) {
+                break;
+            }
+            System.out.println(i);
+        }
+
+        //Java 9
+        intList.stream()
+            .takeWhile(i -> i!=6)
+            .forEach(System.out::println);
+
+
+        // Java 8
+        boolean passed6 = false;
+        for (Integer i : intList){
+            if (i == 6){
+                passed6 = true;
+            }
+            if (passed6){
+                System.out.println(i);
+            }
+        }
+
+        // Java 9
+        intList.stream()
+            .dropWhile(i -> i != 6)
+            .forEach(System.out::println);
+
+        // Java 8
+        for(int i = 0; i < 100; i++) {
+            System.out.println(i);
+        }
+
+        // Java 9
+        IntStream.iterate(1, i -> i < 100, i -> i + 1)
+            .forEach(System.out::println);
+
+        // Java 9
+        IntStream.iterate(1, i -> i + 1)
+            .limit(100)
+            .forEach(System.out::println);
     }
 }

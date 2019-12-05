@@ -20,12 +20,14 @@ class Java9Main {
 
         java9.convertToList("Java", "9", "is", "cool");
 
-        java9.convertToList("Java", "is cool", 9);
+//        java9.convertToList("Java", "is cool", 9);
 
         java9.convertToMap(1, "Stijn", 2, "AP");
 
         java9.streamOptionals();
 
         java9.innerClassDiamonds();
+
+        java9.streamFeatures();
     }
 }
